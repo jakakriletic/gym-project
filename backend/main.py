@@ -23,19 +23,19 @@ mydb = mysql.connector.connect(
 )
 
 class Data(BaseModel):
-    text1: str
-    text2: str
+    lift: str
+    teza: str
+    rep: str
+    rpe: str
 
-@app.post("/process")
+@app.post("/lift")
 async def read_root(data: Data):
-    combined = f"{data.text1} {data.text2}"
-
     mycursor = mydb.cursor()
-    sql = "INSERT INTO combinedString (id, cbString) VALUES(%s, %s)"
-    val = (3, combined)
+    sql = "INSERT INTO lift (lift,teza, rep, rpe) VALUES(%s, %s, %s, %s)"
+    val = (Data.lift,Data.teza, Data.rep, Data.rpe)
     mycursor.execute(sql, val)
     mydb.commit()
 
-    return {"Rezultat": combined}
+    return {"Rezultat": "končano"}
 
 
