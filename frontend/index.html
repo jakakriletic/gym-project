@@ -4,24 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="style" href="./style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <p></p>
-    <div id="full">Izberi lift</div>
-    <select name="izbiraVaje" id="izbiraVaje">
-        <option value="benchpress">benchpress</option>
-        <option value="deadlift">deadlift</option>
-        <option value="pullup">pullup</option>
-        <option value="squat">squat</option>
-    </select>
-    <p></p>
-    <textarea placeholder="Vnesi koliko kg" name="teza" id="teza" rows = 1 cols = 20></textarea>
-    <p></p>
-    <textarea placeholder="Vnesi število ponovitev" name="rep" id="rep" rows = 1 cols = 20></textarea>
-    <p></p>
-    <textarea placeholder="Vnesi RPE" name="rpe" id="rpe" rows = 1 cols = 20></textarea>
-    <p></p>
+    <div id="full"></div>
+
+    <div class="row">
+        <label for="izbiraVaje">Izberi vajo</label>
+        <select name="izbiraVaje" id="izbiraVaje">
+            <option value="benchpress">benchpress</option>
+            <option value="deadlift">deadlift</option>
+            <option value="pullup">pullup</option>
+            <option value="squat">squat</option>
+        </select>
+    </div>
+    <div class="row">
+        <label for="teza">Teža</label>
+        <textarea placeholder="Vnesi koliko kg" name="teza" id="teza" rows = 1 cols = 20></textarea>
+    </div>
+    
+    <div class="row">
+        <label for="rep">Ponovitve</label>
+        <textarea placeholder="Vnesi število ponovitev" name="rep" id="rep" rows = 1 cols = 20></textarea>
+    </div>
+    
+    <div class="row">
+        <label for="rpe">Zahtevnost</label>
+        <textarea placeholder="Vnesi RPE" name="rpe" id="rpe" rows = 1 cols = 20></textarea>
+    </div>
+    
+    <div class="row">
+        <label for="date">Datum</label>
+        <textarea name="date" id="date" rows = 1 cols = 20></textarea>
+    </div>
+
     <button id="submit">Shrani lift</button>
     <p>//: </p> <span id="output"></span>
 

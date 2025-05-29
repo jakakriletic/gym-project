@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import mysql.connector
+from datetime import date
 
 app = FastAPI()
 
@@ -27,12 +28,13 @@ class Data(BaseModel):
     tezaQ: str
     repQ: str
     rpeQ: str
+    sqlDateQ: date
 
 @app.post("/lift")
 async def read_root(data: Data):
     mycursor = mydb.cursor()
-    sql = "INSERT INTO liftbaza (lift,teza, rep, rpe) VALUES(%s, %s, %s, %s)"
-    val = (data.liftQ,data.tezaQ, data.repQ, data.rpeQ)
+    sql = "INSERT INTO liftbaza (lift,teza, rep, rpe, datum) VALUES(%s, %s, %s, %s, %s)"
+    val = (data.liftQ,data.tezaQ, data.repQ, data.rpeQ, data.sqlDateQ)
     mycursor.execute(sql, val)
     mydb.commit()
 
