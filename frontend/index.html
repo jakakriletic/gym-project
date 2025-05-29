@@ -39,9 +39,29 @@
         <textarea name="date" id="date" rows = 1 cols = 20></textarea>
     </div>
 
-    <button id="submit">Shrani lift</button>
-    <p>//: </p> <span id="output"></span>
+    <div class="row">
+        <button id="submit">Shrani lift</button>
+        <p>//: </p> <span id="output"></span>
+    </div>
 
+    <div class="prikazPodatkov">
+        <div class="ppRow">
+            <label for="ppizbiraVaje">Izberi vajo</label>
+            <select name="ppizbiraVaje" id="ppizbiraVaje">
+                <option value="benchpress">benchpress</option>
+                <option value="deadlift">deadlift</option>
+                <option value="pullup">pullup</option>
+                <option value="squat">squat</option>
+            </select>
+        </div>
+        <div class="ppRow">
+            <button id="show">Prikaži kategorijo liftov</button>
+        </div>
+
+        <div id="showWindow">
+            <span id="outputBaza"></span>
+        </div>
+    </div>
     <script src="./script.js"></script>
 </body>
 </html>

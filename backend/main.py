@@ -30,7 +30,18 @@ class Data(BaseModel):
     rpeQ: str
     sqlDateQ: date
 
-@app.post("/lift")
+@app.get("/lift/izpis")
+async def root():
+    mycursor = mydb.cursor()
+    sql = "select * from liftBaza where id = 1"
+    mycursor.execute(sql)
+    row = mycursor.fetchone()
+    if row:
+        return {"id": row[0], "lift": row[1], "teza": row[2], "rep": row[3], "rpe": row[4], "datum": row[5]}
+    else:
+        return {"ni podatkov"}
+
+@app.post("/lift/vpis")
 async def read_root(data: Data):
     mycursor = mydb.cursor()
     sql = "INSERT INTO liftbaza (lift,teza, rep, rpe, datum) VALUES(%s, %s, %s, %s, %s)"

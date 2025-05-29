@@ -11,3 +11,20 @@ padding: 10px;
 #izbiraVaje{
     width: 165px;
 }
+.ppRow {
+display:flex; 
+margin-left: 15px;
+align-items: center;
+padding: 10px;
+}
+.ppRow label{
+    width: 70px;
+    margin-right: 10px;
+}
+#showWindow {
+    margin-left: 25px;
+    height: 500px;
+    width: 500px;
+    border-style: solid;
+    border-color: black 1px;
+}
