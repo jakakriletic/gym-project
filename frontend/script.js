@@ -9,6 +9,8 @@ const submit = document.querySelector("#submit");
 
 submit.onclick = vpis;
 
+
+
 async function vpis() {
     const lift1 = lift.value;
     const teza1 = teza.value;
@@ -25,6 +27,10 @@ async function vpis() {
 
     const data = await response.json();
     output.innerHTML = data.Rezultat;
+    pocisti();
 }
-
-
+function pocisti() {
+    teza.value = "";
+    rep.value = "";
+    rpe.value = "";
+}
