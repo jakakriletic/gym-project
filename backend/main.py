@@ -19,23 +19,23 @@ mydb = mysql.connector.connect(
   host="localhost",
   user="root",
   password="jaka2003",
-  database="testbaza"
+  database="lift"
 )
 
 class Data(BaseModel):
-    lift: str
-    teza: str
-    rep: str
-    rpe: str
+    liftQ: str
+    tezaQ: str
+    repQ: str
+    rpeQ: str
 
 @app.post("/lift")
 async def read_root(data: Data):
     mycursor = mydb.cursor()
-    sql = "INSERT INTO lift (lift,teza, rep, rpe) VALUES(%s, %s, %s, %s)"
-    val = (Data.lift,Data.teza, Data.rep, Data.rpe)
+    sql = "INSERT INTO liftbaza (lift,teza, rep, rpe) VALUES(%s, %s, %s, %s)"
+    val = (data.liftQ,data.tezaQ, data.repQ, data.rpeQ)
     mycursor.execute(sql, val)
     mydb.commit()
 
-    return {"Rezultat": "končano"}
+    return {"Rezultat": data}
 
 

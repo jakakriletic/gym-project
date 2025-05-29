@@ -1,22 +1,26 @@
-const beseda1 = document.querySelector("#vnos1");
-const beseda2 = document.querySelector("#vnos2");
+const lift = document.querySelector("#izbiraVaje")
+const teza = document.querySelector("#teza");
+const rep = document.querySelector("#rep");
+const rpe = document.querySelector("#rpe");
 const output = document.querySelector("#output");
-const button1 = document.querySelector("#submit");
+const submit = document.querySelector("#submit");
 
 
 
-button1.onclick = izpis;
+submit.onclick = vpis;
 
-async function izpis() {
-    const t1 = beseda1.value;
-    const t2 = beseda2.value;
+async function vpis() {
+    const lift1 = lift.value;
+    const teza1 = teza.value;
+    const rep1 = rep.value;
+    const rpe1 = rpe.value;
 
-    const response = await fetch("http://127.0.0.1:8000/process", {
+    const response = await fetch("http://127.0.0.1:8000/lift", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({text1: t1, text2: t2})
+        body: JSON.stringify({liftQ: lift1, tezaQ: teza1, repQ: rep1, rpeQ: rpe1})
     });
 
     const data = await response.json();
