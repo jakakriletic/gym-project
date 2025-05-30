@@ -30,6 +30,10 @@ class Data(BaseModel):
     rpeQ: str
     sqlDateQ: date
 
+@app.post("lift/delete/{lift_id}")
+async def read_root(lift_id: int):
+    return ""
+
 @app.get("/lift/izpis/{lift_name}")
 async def root(lift_name: str):
     mycursor = mydb.cursor()

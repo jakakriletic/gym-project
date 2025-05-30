@@ -10,6 +10,7 @@ const table = document.querySelector("#liftBody");
 const liftTable = document.querySelector("#liftTable");
 const izbiraVaje2 = document.querySelector("#ppizbiraVaje");
 const clean = document.querySelector("#clean");
+let stevecRow = 0;
 
 var date = new Date();
 var dd = String(date.getDate()).padStart(2, '0');
@@ -32,6 +33,7 @@ async function getLift(params) {
         const vrstica = podatki[i];
         console.log(vrstica);
         tableInsert(vrstica);
+        stevecRow ++;
     }
     
 }
@@ -42,6 +44,7 @@ function cleanTable(){
     }
 }
 
+
 function tableInsert(vrstica){
     const rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
@@ -51,6 +54,7 @@ function tableInsert(vrstica){
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
     var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
     
     cell1.innerHTML = vrstica.id;
     cell2.innerHTML = vrstica.lift;
@@ -58,6 +62,22 @@ function tableInsert(vrstica){
     cell4.innerHTML = vrstica.rep;
     cell5.innerHTML = vrstica.rpe;
     cell6.innerHTML = vrstica.datum;
+    createButton(cell7);
+}
+
+function createButton(cell7){
+    const btn = document.createElement("button");
+    btn.type="button";
+    btn.innerHTML = "X";
+    cell7.appendChild(btn);
+    btn.onclick = function() {
+    deleteRowFunction(btn);
+} 
+}
+
+function deleteRowFunction(btn) {
+    var vrstica = btn.closest("tr");
+    vrstica.remove();
 }
 async function vpis() {
     const lift1 = lift.value;
