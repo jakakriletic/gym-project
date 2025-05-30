@@ -30,16 +30,17 @@ class Data(BaseModel):
     rpeQ: str
     sqlDateQ: date
 
-@app.get("/lift/izpis")
-async def root():
+@app.get("/lift/izpis/{lift_name}")
+async def root(lift_name: str):
     mycursor = mydb.cursor()
-    sql = "select * from liftBaza where id = 1"
-    mycursor.execute(sql)
-    row = mycursor.fetchone()
-    if row:
-        return {"id": row[0], "lift": row[1], "teza": row[2], "rep": row[3], "rpe": row[4], "datum": row[5]}
-    else:
-        return {"ni podatkov"}
+    sql = "select * from liftBaza where lift = %s"
+    mycursor.execute(sql, (lift_name,))
+    rows = mycursor.fetchall()
+
+    array = []
+    for row in rows:
+         array.append({"id": row[0], "lift": row[1], "teza": row[2], "rep": row[3], "rpe": row[4], "datum": row[5]})
+    return array
 
 @app.post("/lift/vpis")
 async def read_root(data: Data):

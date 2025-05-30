@@ -22,9 +22,20 @@ padding: 10px;
     margin-right: 10px;
 }
 #showWindow {
-    margin-left: 25px;
-    height: 500px;
-    width: 500px;
-    border-style: solid;
-    border-color: black 1px;
+    padding-right: 50px;
+    height: auto;
+    width: 100px;
+    
+}
+#liftTable{
+    margin-right: auto;
+    margin-left: auto;
+    border:1px solid black;
+}
+#liftTable th,td{
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    white-space: nowrap;
+    text-align: center;
 }

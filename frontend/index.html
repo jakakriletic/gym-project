@@ -56,10 +56,25 @@
         </div>
         <div class="ppRow">
             <button id="show">Prikaži kategorijo liftov</button>
+            <button id="clean">Počisti tabelo</button>
         </div>
 
         <div id="showWindow">
-            <span id="outputBaza"></span>
+            <table id="liftTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Lift ime</th>
+                        <th>Teža</th>
+                        <th>Število repov</th>
+                        <th>Napor</th>
+                        <th>Datum</th>
+                    </tr>
+                </thead>
+                <tbody id="liftBody">
+
+                </tbody>
+            </table>
         </div>
     </div>
     <script src="./script.js"></script>
