@@ -11,6 +11,7 @@ const liftTable = document.querySelector("#liftTable");
 const izbiraVaje2 = document.querySelector("#ppizbiraVaje");
 const clean = document.querySelector("#clean");
 let stevecRow = 0;
+var arrayID = [];
 
 var date = new Date();
 var dd = String(date.getDate()).padStart(2, '0');
@@ -19,7 +20,6 @@ var yyyy = String(date.getFullYear());
 var today = dd +'/' + mm +'/' + yyyy;
 document.querySelector("#date").innerHTML = today;
 var sqlDate = yyyy + "-" + mm + "-" + dd;
-
 
 button1.onclick = vpis;
 button2.onclick = getLift;
@@ -31,20 +31,25 @@ async function getLift(params) {
 
     for (let i = 0; i < podatki.length; i++) {
         const vrstica = podatki[i];
+
         console.log(vrstica);
+        arrayID[stevecRow] = vrstica.id;
+        //-------------------------------
+        console.log("ID v arrayu: " + arrayID[stevecRow]);
+        //-------------------------------
         tableInsert(vrstica);
         stevecRow ++;
+        
     }
     
 }
 function cleanTable(){
     while (table.rows.length > 0) {
-        console.log("moralo bi brisati");
         table.deleteRow(0);
+        stevecRow = 0;
+        arrayID = [];
     }
 }
-
-
 function tableInsert(vrstica){
     const rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
@@ -69,7 +74,14 @@ function createButton(cell7){
     const btn = document.createElement("button");
     btn.type="button";
     btn.innerHTML = "X";
+    btn.value = stevecRow;
     cell7.appendChild(btn);
+    //--------------------
+    console.log("ArrayID trenuten");
+    arrayID.forEach(e => console.log(e));
+    console.log("Value buttona: "+ btn.value);
+    console.log("value stevec row: " + stevecRow);
+    //--------------------
     btn.onclick = function() {
     deleteRowFunction(btn);
 } 
@@ -77,7 +89,44 @@ function createButton(cell7){
 
 function deleteRowFunction(btn) {
     var vrstica = btn.closest("tr");
+    var currentRow = btn.value;
+    //-------------------------------------
+    console.log("Value current row: "+ currentRow);
+    //-------------------------------------
+    var lift_id = getLiftIDBase(currentRow);
+    deleteBazaRowFunction(lift_id);
     vrstica.remove();
+}
+function getLiftIDBase(currentRow) {
+    for (let i = 0; i < arrayID.length; i++) {
+        if (i == parseInt(currentRow)) {
+            var lift_id_ = arrayID[i];
+            //---------------------------
+            console.log("ovo radi")
+            //---------------------------
+            return lift_id_;
+        }
+        else {
+            //---------------------------
+            console.log(i + " vs "+ currentRow);
+            console.log("Ni podatka for some reason")
+            //---------------------------
+        }
+    }
+    
+}
+
+async function deleteBazaRowFunction(lift_id) {
+    //var lift_id = getIDBase(stevecRow);
+    try {
+        const response = await fetch("http://127.0.0.1:8000/lift/delete/" + lift_id, {
+            method: "DELETE", 
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(lift_id)
+        });
+    } catch (err) {
+        output.innerText = "Napaka: " + err.message;
+    }
 }
 async function vpis() {
     const lift1 = lift.value;
@@ -89,9 +138,7 @@ async function vpis() {
     try{
         const response = await fetch("http://127.0.0.1:8000/lift/vpis", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({liftQ: lift1, tezaQ: teza1, repQ: rep1, rpeQ: rpe1, sqlDateQ: sqlDate1})
     });
     const data = await response.json();

@@ -30,9 +30,13 @@ class Data(BaseModel):
     rpeQ: str
     sqlDateQ: date
 
-@app.post("lift/delete/{lift_id}")
-async def read_root(lift_id: int):
-    return ""
+@app.delete("/lift/delete/{lift_id}")
+async def brisi_uporabnika(lift_id: int):
+    mycursor = mydb.cursor()
+    sql = "delete from liftBaza where id = %s"
+    mycursor.execute(sql, (lift_id,))
+    mydb.commit()
+    return "Uspešno deletano"
 
 @app.get("/lift/izpis/{lift_name}")
 async def root(lift_name: str):
