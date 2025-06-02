@@ -21,11 +21,17 @@ var today = dd +'/' + mm +'/' + yyyy;
 document.querySelector("#date").innerHTML = today;
 var sqlDate = yyyy + "-" + mm + "-" + dd;
 
-button1.onclick = vpis;
-button2.onclick = getLift;
-clean.onclick = cleanTable;
 
-async function getLift(params) {
+button1.onclick = vpis;
+//button2.onclick = getLift;
+//clean.onclick = cleanTable;
+izbiraVaje2.onchange = izbiraVaje2Activation;
+
+function izbiraVaje2Activation() {
+    cleanTable();
+    getLift();
+}
+async function getLift() {
     const response = await fetch("http://127.0.0.1:8000/lift/izpis/" + izbiraVaje2.value);
     const podatki = await response.json();
 
@@ -148,6 +154,7 @@ async function vpis() {
     } catch (err) {
         output.innerText = "Napaka: " + err.message;
     }
+    izbiraVaje2Activation();
 
 }
 function pocisti() {
