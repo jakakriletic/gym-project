@@ -40,6 +40,7 @@ padding: 10px;
     text-align: center;
 }
 .header {
+    margin-top: 3%;
     background: linear-gradient(to bottom left, #9df19d 0%, #23d323 100%);
     border-radius: 15px;
     height: 50px;
@@ -67,5 +68,16 @@ padding: 10px;
 .navLinks a:hover{
     background-color:rgb(64, 189, 64);
     border-radius: 12px;
+}
+.box1 {
+    /*border: black solid 1px;*/
+    width: 55%;
+}
+.box2 {
+    /*border: black solid 1px;*/
+    width: 45%;
+}
+.container{
+    display: flex;
 }
  

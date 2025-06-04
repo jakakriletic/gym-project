@@ -1,3 +1,5 @@
+import { chartShow } from './charts.js';
+
 const lift = document.querySelector("#izbiraVaje")
 const teza = document.querySelector("#teza");
 const rep = document.querySelector("#rep");
@@ -21,6 +23,11 @@ var today = dd +'/' + mm +'/' + yyyy;
 document.querySelector("#date").innerHTML = today;
 var sqlDate = yyyy + "-" + mm + "-" + dd;
 
+// TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+const x = [50,60,70,80,90,100,110,120,130,140,150];
+const y = [7,8,8,9,9,9,10,11,14,14,15];
+chartShow(x, y);
+// TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 button1.onclick = vpis;
 //button2.onclick = getLift;
