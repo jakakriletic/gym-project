@@ -61,7 +61,13 @@ async function getLiftChart() {
     }
     chartShow(arrayDatum, arrayTeza, arrayLegend); 
 }
-
+function cleanTable(){
+    while (table.rows.length > 0) {
+        table.deleteRow(0);
+        stevecRow = 0;
+        arrayID = [];
+    }
+}
 async function getLift() {
     const response = await fetch("http://127.0.0.1:8000/lift/izpis/" + izbiraVaje2.value);
     const podatki = await response.json();
@@ -79,13 +85,7 @@ async function getLift() {
         
     }
 }
-function cleanTable(){
-    while (table.rows.length > 0) {
-        table.deleteRow(0);
-        stevecRow = 0;
-        arrayID = [];
-    }
-}
+
 function tableInsert(vrstica){
     const rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
@@ -191,4 +191,23 @@ function pocisti() {
     teza.value = "";
     rep.value = "";
     rpe.value = "";
+}
+//dodajanje dneva v split
+const splitTable = document.querySelector(".splitTable");
+const splitAdd = document.querySelector("#splitAdd");
+const split = document.querySelector("#split");
+
+export function splitAddFunction() {
+    console.log("PRide čes addSplitDay")
+    var rowCount = splitTable.rows.length;
+    var row = splitTable.insertRow(rowCount);
+    var cell1 = row.insertCell(0);
+    createSplitButton(cell1);
+}
+
+function createSplitButton(cell1) {
+    const btn = document.createElement("button");
+    btn.innerHTML = split.value;
+    cell1.appendChild(btn);
+    split.value = "";
 }

@@ -69,15 +69,19 @@ padding: 10px;
     background-color:rgb(64, 189, 64);
     border-radius: 12px;
 }
-.box1 {
-    /*border: black solid 1px;*/
+.box1Leva, .box2Leva {
     width: 55%;
+    border: black solid 1px;
 }
-.box2 {
-    /*border: black solid 1px;*/
+.box1Desna, .box2Desna {
     width: 45%;
+    border: black solid 1px;
 }
-.container{
+.btnSplit {
+    width: 100px;
+}
+.container {
     display: flex;
 }
+
  

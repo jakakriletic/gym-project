@@ -16,8 +16,28 @@
         </nav>
     </div>
     <p></p>
+    <button id="divToggle">Toggle</button>
     <div class= "container">
-        <div class="box1">
+        <!--prikaz splita -->
+        <div class="box1Leva">
+                <table class= "splitTable">
+                    <tr><td><button class="btnSplit">CHEST DAY</button></td></tr>
+                    <tr><td><button class="btnSplit">BACK DAY</button></td></tr>
+                    <tr><td><button class="btnSplit">LEG DAY</button></td></tr>
+                </table>
+        </div>
+        <!--Dodajanje custom split dneva-->
+        <div class="box1Desna">
+            <button id="insertSplitDay">EDIT DAY</button>
+            <div class= "SplitDay" style="display: none;">
+                <label for="split">Day name:</label>
+                <textarea placeholder="Vnesi ime novega dneva" name="split" id="split"></textarea>
+                <button id="splitAdd">Add</button>
+                <button id="splitCancle">Cancle</button>
+            </div>
+        </div>
+        <!--prikaz ustavljanja liftov-->
+        <div class="box2Leva" style="display: none;">
             <div class="row">
                 <label for="izbiraVaje">Izberi vajo</label>
                 <select name="izbiraVaje" id="izbiraVaje">
@@ -81,17 +101,19 @@
                             </tr>
                         </thead>
                         <tbody id="liftBody">
-
+                            <!--Vnos v tabelo od scriptLift.js-->
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="box2">
-            <canvas id="chartLift" style="width:100%;max-width:700px"></canvas>
+        <!--prikazovanje grafov -->
+        <div class="box2Desna" style="display: none;">
+            <canvas id="chartLift" style="width:100%;max-width:700px;"></canvas>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="./javascript/scriptDOM.js" type="module"></script>
     <script src="./javascript/charts.js"></script>
     <script src="./javascript/RPE_faktor.js"></script>
     <script src="./javascript/scriptLift.js" type="module"></script>
