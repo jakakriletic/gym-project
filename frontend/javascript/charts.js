@@ -1,9 +1,15 @@
-const x = [50,60,70,80,90,100,110,120,130,140,150];
-const y = [7,8,8,9,9,9,10,11,14,14,15];
+export function chartShow(xValues, yValues, legendValues) {
+  var yMin = Math.min(...yValues);
+  var yMax = Math.max(...yValues);
+  yMin = Math.ceil(yMin * 0.5/10) * 10;
+  yMax = Math.ceil(yMax * 1.5/10) * 10;
+  yValues.unshift(0);
+  xValues.unshift(0);
 
-//chartShow(x, y);
+  console.log("xValues: " + xValues);
+  console.log("yValues: " + yValues);
+  console.log("legendValues: " + legendValues);
 
-export function chartShow(xValues, yValues) {
   new Chart("chartLift", {
   type: "line",
   data: {
@@ -16,9 +22,9 @@ export function chartShow(xValues, yValues) {
       data: yValues
     }]
   },
-  options:{legend: {display: false},
-    scales: {
-      yAxes: [{ticks: {min: 6, max:16}}],
-    }}
+  options:{
+    legend: {display: false},
+    scales: {yAxes: [{ticks: {min: yMin, max:yMax}}],}
+  }
 });
 }

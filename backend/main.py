@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import mysql.connector
 from datetime import date
+import json
 
 app = FastAPI()
 
@@ -37,6 +38,18 @@ async def brisi_uporabnika(lift_id: int):
     mycursor.execute(sql, (lift_id,))
     mydb.commit()
     return "Uspešno deletano"
+
+@app.get("/lift/izpisChart/{lift_name}")
+async def izpis_dt_lift(lift_name: str):
+    mycursor = mydb.cursor()
+    sql = "select teza,rep,rpe,datum from liftBaza where lift = %s"
+    mycursor.execute(sql, (lift_name,))
+    rows = mycursor.fetchall()
+
+    array = []
+    for row in rows:
+        array.append({"teza": row[0],"rep": row[1],"rpe": row[2], "datum": row[3]})
+    return array
 
 @app.get("/lift/izpis/{lift_name}")
 async def root(lift_name: str):

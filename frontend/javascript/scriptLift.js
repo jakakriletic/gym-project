@@ -1,5 +1,5 @@
 import { chartShow } from './charts.js';
-
+import { RPE_factorFunction } from './RPE_faktor.js';
 const lift = document.querySelector("#izbiraVaje")
 const teza = document.querySelector("#teza");
 const rep = document.querySelector("#rep");
@@ -23,12 +23,6 @@ var today = dd +'/' + mm +'/' + yyyy;
 document.querySelector("#date").innerHTML = today;
 var sqlDate = yyyy + "-" + mm + "-" + dd;
 
-// TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const x = [50,60,70,80,90,100,110,120,130,140,150];
-const y = [7,8,8,9,9,9,10,11,14,14,15];
-chartShow(x, y);
-// TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 button1.onclick = vpis;
 //button2.onclick = getLift;
 //clean.onclick = cleanTable;
@@ -37,7 +31,37 @@ izbiraVaje2.onchange = izbiraVaje2Activation;
 function izbiraVaje2Activation() {
     cleanTable();
     getLift();
+    getLiftChart();
 }
+
+async function getLiftChart() {
+   const response = await fetch("http://127.0.0.1:8000/lift/izpisChart/" + izbiraVaje2.value);
+    const podatki = await response.json();
+    var arrayTeza = [];
+    var arrayDatum = [];
+    var arrayLegend = [];
+
+    for (let i = 0; i < podatki.length;i++) {
+        const gotData = podatki[i];
+        var rpeFaktor = RPE_factorFunction(gotData.rpe, gotData.rep);
+        //----------------------------------------
+        console.log("RPE: " + gotData.rpe);
+        console.log("Rep: " + gotData.rep);
+        //----------------------------------------
+        if (!rpeFaktor || rpeFaktor === 0) continue;
+        var oneRepMax = gotData.teza / rpeFaktor;
+        //----------------------------------------
+        console.log("RPE faktor: " + rpeFaktor);
+        console.log("One Rep Max: " + oneRepMax);
+        console.log("Teža: " + gotData.teza);
+        //----------------------------------------
+        arrayLegend.push(gotData.teza);
+        arrayTeza.push(oneRepMax);
+        arrayDatum.push(gotData.datum);
+    }
+    chartShow(arrayDatum, arrayTeza, arrayLegend); 
+}
+
 async function getLift() {
     const response = await fetch("http://127.0.0.1:8000/lift/izpis/" + izbiraVaje2.value);
     const podatki = await response.json();
@@ -54,7 +78,6 @@ async function getLift() {
         stevecRow ++;
         
     }
-    
 }
 function cleanTable(){
     while (table.rows.length > 0) {
@@ -125,8 +148,7 @@ function getLiftIDBase(currentRow) {
             console.log("Ni podatka for some reason")
             //---------------------------
         }
-    }
-    
+    } 
 }
 
 async function deleteBazaRowFunction(lift_id) {
@@ -140,6 +162,7 @@ async function deleteBazaRowFunction(lift_id) {
     } catch (err) {
         output.innerText = "Napaka: " + err.message;
     }
+    getLiftChart();
 }
 async function vpis() {
     const lift1 = lift.value;
