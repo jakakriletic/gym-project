@@ -30,6 +30,10 @@ class Data(BaseModel):
     rpeQ: str
     sqlDateQ: date
 
+class nameDayInput(BaseModel):
+    day_name: str
+
+
 @app.delete("/lift/delete/{lift_id}")
 async def brisi_uporabnika(lift_id: int):
     mycursor = mydb.cursor()
@@ -66,7 +70,7 @@ async def root(lift_name: str):
 async def read_root(data: Data):
     mycursor = mydb.cursor()
     sql = "INSERT INTO liftbaza (lift,teza, rep, rpe, datum) VALUES(%s, %s, %s, %s, %s)"
-    val = (data.liftQ,data.tezaQ, data.repQ, data.rpeQ, data.sqlDateQ)
+    val = (data.liftQ,data.tezaQ, data.repQ, data.rpeQ, data.sqlDateQ,)
     mycursor.execute(sql, val)
     mydb.commit()
 
@@ -80,4 +84,13 @@ async def gymDay():
     rez = mycursor.fetchall()
 
     return rez
+@app.post("/lift/addDay")
+async def addDay(data: nameDayInput):
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO gymDay (dayName) VALUES(%s)"
+    val = (data.day_name,)
+    mycursor.execute(sql, val)
+    mydb.commit()
+
+    return "Dela"
 

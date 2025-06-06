@@ -1,5 +1,5 @@
 const chooseDaysTable = document.querySelector("#chooseDaysTable");
-
+import {chooseDayToAddSPlit} from './scriptPanelDOM.js'
 export async function getChooseDayButton() {
     const response = await fetch("http://127.0.0.1:8000/lift/gymDay");
     const podatki = await response.json();
@@ -31,8 +31,23 @@ function createLastButton() {
     btn.innerHTML = "ADD";
     btn.style.width = "100px";
     cell1.appendChild(btn);
+    btn.onclick = () => {
+        chooseDayToAddSPlit();
+    }
 }
 
+export async function addDay(name) {
+    console.log("POSLANO IME:" +name)
+    try {
+        const response = await fetch("http://127.0.0.1:8000/lift/addDay", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({day_name:name})
+        })
+    } catch (err) {
+         console.error("Fetch napaka:", err.message);
+    }
+}
 
 
 
