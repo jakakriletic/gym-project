@@ -16,7 +16,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
@@ -73,4 +72,12 @@ async def read_root(data: Data):
 
     return {"Rezultat": data}
 
+@app.get("/lift/gymDay")
+async def gymDay():
+    mycursor = mydb.cursor()
+    sql = "SELECT * from gymDay"
+    mycursor.execute(sql)
+    rez = mycursor.fetchall()
+
+    return rez
 

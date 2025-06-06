@@ -192,22 +192,30 @@ function pocisti() {
     rep.value = "";
     rpe.value = "";
 }
-//dodajanje dneva v split
-const splitTable = document.querySelector(".splitTable");
-const splitAdd = document.querySelector("#splitAdd");
-const split = document.querySelector("#split");
 
-export function splitAddFunction() {
-    console.log("PRide čes addSplitDay")
-    var rowCount = splitTable.rows.length;
+//dodajanje ime dnevov v Splitu
+const splitTable = document.querySelector("#splitTable");
+window.onload = getSplitTableButton;
+
+async function getSplitTableButton() {
+    const response = await fetch("http://127.0.0.1:8000/lift/gymDay");
+    const podatki = await response.json();
+    
+    for (let i = 0; i <podatki.length; i++) {
+        var nameDay = podatki[i];
+        createSplitTableButton(nameDay[1]);
+    }
+}
+function createSplitTableButton (nameDay) {
+    const cell1 = updateSplitTable();
+    var btn = document.createElement("button");
+    btn.innerHTML = nameDay;
+    btn.style.width = "100px";
+    cell1.appendChild(btn);
+}
+function updateSplitTable() {
+    const rowCount = splitTable.rows.length;
     var row = splitTable.insertRow(rowCount);
     var cell1 = row.insertCell(0);
-    createSplitButton(cell1);
-}
-
-function createSplitButton(cell1) {
-    const btn = document.createElement("button");
-    btn.innerHTML = split.value;
-    cell1.appendChild(btn);
-    split.value = "";
+    return cell1;
 }

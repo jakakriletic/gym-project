@@ -1,0 +1,27 @@
+
+.box1Desna {
+    display: flex;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+}
+.box1Desna label{
+    width: 70px;
+    margin-right: 10px;
+}
+.box1Desna textarea {
+    resize: none;
+}
+.SplitContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    margin-bottom: 4%;
+}
+.SplitDay {
+    margin: 15px;
+}
+#insertSplitDay {
+    margin-top: 10px;
+    margin-left: 10px;
+}

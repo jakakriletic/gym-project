@@ -1,11 +1,20 @@
-CREATE DATABASE IF NOT EXISTS testbaza;
-USE testbaza;
-
-CREATE TABLE IF NOT EXISTS liftbaza (
+CREATE TABLE liftbaza (
     id INT AUTO_INCREMENT PRIMARY KEY,
     lift VARCHAR(255),
     teza VARCHAR(255),
     rep VARCHAR(255),
     rpe VARCHAR(255),
     datum DATE
+);
+
+CREATE TABLE gymDay (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    dayName VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE gymDayLifts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    liftName VARCHAR(255) NOT NULL,
+    id_day INT NOT NULL,
+    FOREIGN KEY (id_day) REFERENCES gymDay(id)
 );
