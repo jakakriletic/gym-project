@@ -16,21 +16,27 @@
             <a href="panel.html">PANEL</a>
         </nav>
     </div>
-    <div class="box1Desna">
-            <button id="insertSplitDay">EDIT DAY</button>
-                <div class= "SplitDay" style="display: none;">
-                    <div class="SplitContainer"> 
-                        <label for="split">Day name:</label>
-                        <textarea placeholder="Vnesi ime novega dneva" name="split" id="split" cols = 20></textarea>
-                        <p></p>
-                    </div>
-                    
-                    <button id="splitAdd">Add</button>
-                    <button id="splitCancle">Cancle</button>
-                </div>
-        </div>
+    <div class="box1P">
+        <button id="insertSplitDay">EDIT DAY</button>
+        <div class="chooseDaySplit"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
+            <table id="chooseDaysTable">  
 
-    <script src="./javascript/scriptDOM.js" type="module"></script>
-    <script src="./javascript/scriptPanel.js" type="module"></script>
+            </table>
+        </div>
+        <div class= "SplitDay">
+            <div class="SplitContainer"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
+                <label for="split">Day name:</label>
+                <textarea placeholder="Vnesi ime novega dneva" name="split" id="split" cols = 20></textarea>
+                <p></p>
+        </div>
+            
+            <button id="splitAdd">Add</button>
+            <button id="splitCancle">Cancle</button>
+        </div>
+    </div>
+
+    <script src="./javascript/scriptDOM.js" type="module" ></script>
+    <script src="./javascript/scriptPanelDOM.js" type="module" ></script>
+    <script src="./javascript/scriptPanel.js" type="module" ></script>
 </body>
 </html>

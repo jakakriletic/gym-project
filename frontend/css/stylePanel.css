@@ -1,15 +1,15 @@
 
-.box1Desna {
+.box1P {
     display: flex;
     width: auto;
     justify-content: center;
     align-items: center;
 }
-.box1Desna label{
+.box1P label{
     width: 70px;
     margin-right: 10px;
 }
-.box1Desna textarea {
+.box1P textarea {
     resize: none;
 }
 .SplitContainer {
