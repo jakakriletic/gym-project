@@ -1,11 +1,15 @@
 const chooseDaysTable = document.querySelector("#chooseDaysTable");
-import {chooseDayToAddSPlit} from './scriptPanelDOM.js'
+var dayID;
+import {chooseDayToAddSPlit} from './scriptPanelDOM.js';
+import {daysToEdit} from './scriptPanelDOM.js';
+
 export async function getChooseDayButton() {
     const response = await fetch("http://127.0.0.1:8000/lift/gymDay");
     const podatki = await response.json();
     
     for (let i = 0; i <podatki.length; i++) {
         var nameDay = podatki[i];
+        dayID = podatki[i][0];
         createChooseDayButton(nameDay[1]);
     }
     createLastButton();
@@ -16,7 +20,11 @@ function createChooseDayButton (nameDay) {
     var btn = document.createElement("button");
     btn.innerHTML = nameDay;
     btn.style.width = "100px";
+    btn.value=dayID;
     cell1.appendChild(btn);
+    btn.onclick = () => {
+        daysToEdit();
+    }
 }
 
 function updateChooseDayTable() {
@@ -51,24 +59,3 @@ export async function addDay(name) {
 
 
 
-/*
-//dodajanje dneva v split
-const splitTable = document.querySelector(".splitTable");
-const splitAdd = document.querySelector("#splitAdd");
-const split = document.querySelector("#split");
-
-function splitAddFunction() {
-    console.log("PRide čes addSplitDay")
-    var rowCount = splitTable.rows.length;
-    var row = splitTable.insertRow(rowCount);
-    var cell1 = row.insertCell(0);
-    createSplitButton(cell1);
-}
-
-function createSplitButton(cell1) {
-    const btn = document.createElement("button");
-    btn.innerHTML = split.value;
-    btn.className = "btnSplit";
-    cell1.appendChild(btn);
-    split.value = "";
-}*/

@@ -6,21 +6,24 @@ const buttonsplitAdd = document.querySelector("#splitAdd");
 const buttonsplitCancle= document.querySelector("#splitCancle");
 const chooseDaySplit = document.querySelector(".chooseDaySplit");
 
+export function chooseDayToAddSPlit() {
+    divSplit.style.display = "block";
+    chooseDaySplit.style.display = "none";
+}
+export function daysToEdit() {
 
+}
 buttonSplit.onclick = () => {
     chooseDaySplit.style.display = "block";
     buttonSplit.style.display = "none";
     getChooseDayButton();
 }
-export function chooseDayToAddSPlit() {
-    divSplit.style.display = "block";
-    chooseDaySplit.style.display = "none";
-}
+
 buttonsplitAdd.onclick = () => {
     var newSplitDayInput = document.querySelector("#split");
     if (newSplitDayInput) {
         addDay(newSplitDayInput.value);
-        //location.reload();
+        location.reload();
     }
     else {
         console.log("ne dela");
@@ -29,8 +32,11 @@ buttonsplitAdd.onclick = () => {
     
 }
 buttonsplitCancle.onclick = () => {
+    cancle();
+}
+function cancle() {
     divSplit.style.display = "none";
-    buttonSplit.style.display = "block";
+    chooseDaySplit.style.display = "block";
 }
 /*
 buttonSplit.onclick = () => {
