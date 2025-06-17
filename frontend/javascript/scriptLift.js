@@ -156,8 +156,6 @@ async function deleteBazaRowFunction(lift_id) {
     try {
         const response = await fetch("http://127.0.0.1:8000/lift/delete/" + lift_id, {
             method: "DELETE", 
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(lift_id)
         });
     } catch (err) {
         output.innerText = "Napaka: " + err.message;

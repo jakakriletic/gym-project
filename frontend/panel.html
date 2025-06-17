@@ -30,12 +30,41 @@
                 <p></p>
             </div>
             
-            <button id="splitAdd">Add</button>
-            <button id="splitCancle">Cancle</button>
+            <button class="btn" id="splitAdd">Add</button>
+            <button class="btn" id="splitCancle">Cancle</button>
         </div>
-        <div class="editDay"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
+        
+    </div>
+    <div class="box2P">
+        <div class="editDay" style="display: none;"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
+            <div id="leftSide">
+                <div id="buttons"> 
+                    <button class="btn" id="goToAddExercise">Add new lifts</button>
+                    <p></p>
+                    <button class="btn" id="cancleLifts">Cancle</button>
+                    <button class="btn" id="deleteDay">Delete</button>
+                </div>
+                <div id="addExerciseDiv" style="display: none;">
+                    <textarea placeholder="Add lift" name="addExerciseField" id="addExerciseField"></textarea>
+                    <p></p>
+                    <button class="btn" id="addExercise">Add</button>
+                    <button class="btn" id="cancleExercise">Cancle</button>
+                </div>
+                
+            </div>
+            <div id="rightSide">
+                <p>List of exercises</p>
+                <table id="insertExercise">
 
+                </table>
+            </div>
         </div>
+    </div>
+    <div class="box3P" style="display: none;">
+        <textarea name="nameLiftHolder" id="nameLiftHolder"></textarea>
+        <button class="btn" id="removeLift">Remove</button>
+        <button class="btn" id="editName">Edit</button>
+        <button class="btn" id="cancleLiftEdit">Cancle</button>
     </div>
 
     <script src="./javascript/scriptDOM.js" type="module" ></script>

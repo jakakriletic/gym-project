@@ -25,3 +25,28 @@
     margin-top: 10px;
     margin-left: 10px;
 }
+.editDay {
+    display: flex;
+    width: 100%;
+    height: auto;
+    /*border: black solid 1px;*/
+}
+#leftSide {
+    display: block;
+    box-sizing: border-box;
+    width: 50%;
+    height: auto;
+    border: black solid 1px;
+}
+#rightSide {
+    width: 50%;
+    box-sizing: border-box;
+    height: auto;
+    border: black solid 1px;
+}
+#rightSide button {
+    display: block;
+}
+#cancleLifts{
+    height: 100%;
+}
