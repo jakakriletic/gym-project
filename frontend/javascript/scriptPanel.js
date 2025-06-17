@@ -26,9 +26,17 @@ function createChooseDayButton (nameDay) {
     btn.value=dayID;
     cell1.appendChild(btn);
     btn.onclick = () => {
+        setDayID(btn.value);
         day_id_ = btn.value;
         daysToEdit(day_id_);
     }
+}
+let IDDay=0;
+export function setDayID(id) {
+    IDDay = id;
+}
+export function getDayID() {
+    return IDDay;
 }
 
 
@@ -37,6 +45,7 @@ function createLastButton() {
     var btn = document.createElement("button");
     btn.innerHTML = "ADD";
     btn.style.width = "100px";
+    btn.id = "addButton";
     cell1.appendChild(btn);
     btn.onclick = () => {
         chooseDayToAddSPlit();
@@ -85,7 +94,7 @@ function showLiftButton(podatki) {
     }
 }
 //samo vrača return -- uporabljeno za scriptPanel
-export function returnLiftName() {
+export function getLiftName() {
     return liftName;
 }
 
@@ -115,16 +124,27 @@ export async function insertExercise(name, izbira) {
     }
 }
 
-//briše lifte iz baze
+//briše lifte iz baze gymDayLifts
 export async function deleteLift(name) {
     console.log(name);
     try {
         const response = await fetch("http://127.0.0.1:8000/lift/deleteLift/" + name, {
-            method: 'DELETE',
+            method: 'DELETE'
         })
     } catch (err) {
          console.error("Fetch napaka:", err.message);
     }
+}
+//briše dan lifta --chest day,back day, leg day...--- iz tabele gymDay
+export async function deleteDay(id) {
+    try {
+        const response = await fetch("http://127.0.0.1:8000/lift/deleteDay/" + id, {
+            method: 'DELETE'
+        })
+    } catch (err) {
+         console.error("Fetch napaka:", err.message);
+    }
+    
 }
 export function cleanTable(table){
     while (table.rows.length > 0) {
@@ -137,7 +157,7 @@ function appendRowCell(table) {
     var cell1 = row.insertCell(0);
     return cell1;
 }
-export function returnDay_id_() {
+export function getDay_id_() {
     return day_id_;
 }
 

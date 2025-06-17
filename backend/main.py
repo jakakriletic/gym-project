@@ -98,6 +98,15 @@ async def addDay(data: nameDayInput):
     mydb.commit()
     return "Vnos day dela"
 
+@app.delete("/lift/deleteDay/{idDay}")
+async def deleteLift(idDay: int):
+    mycursor = mydb.cursor()
+    sql = "DELETE FROM gymDay where id = %s"
+    val = (idDay,)
+    mycursor.execute(sql, val)
+    mydb.commit()
+    return "vspešno deletano"
+
 @app.get("/lift/getExercise/{day_id}")
 async def getExercise(day_id: int):
     mycursor = mydb.cursor()

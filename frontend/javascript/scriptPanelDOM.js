@@ -1,5 +1,5 @@
-import {getChooseDayButton, addDay, showExercise, insertExercise, cleanTable, returnDay_id_, deleteLift, returnLiftName} from './scriptPanel.js';
-
+import {getChooseDayButton, addDay, showExercise, insertExercise, cleanTable, getDay_id_, deleteLift, getLiftName, deleteDay} from './scriptPanel.js';
+import {getDayID} from './scriptPanel.js';
 const buttonSplit = document.querySelector("#insertSplitDay")
 const divSplit = document.querySelector(".SplitDay");
 const buttonsplitAdd = document.querySelector("#splitAdd");
@@ -16,12 +16,20 @@ const cancleLiftsButton = document.querySelector("#cancleLifts");
 const box3PDiv = document.querySelector(".box3P");
 const editNameTextfield =  document.querySelector("#nameLiftHolder");
 const insertExerciseTable = document.querySelector("#insertExercise");
-
+//brisanje dnevov iz baze -- klici in DOM
+const dayTable = document.querySelector("#chooseDaysTable");
+document.querySelector("#deleteDay").onclick = async () => {
+    await deleteDay(getDayID());
+    cleanTable(dayTable);
+    await getChooseDayButton();
+    divChooseDaySplit.style.display = "block";
+    diveditDay.style.display = "none";
+}
 //koda za editanje lifta
 //odstrani izbran lift iz strani in iz baze
 document.querySelector("#removeLift").onclick = async () => {
-    await deleteLift(returnLiftName());
-    await updateTable(returnDay_id_());
+    await deleteLift(getLiftName());
+    await updateTable(getDay_id_());
 }
 //cancla editanje lifta
 document.querySelector("#cancleLiftEdit").onclick = () => {
@@ -32,7 +40,7 @@ document.querySelector("#cancleLiftEdit").onclick = () => {
 document.querySelector("#editName").onclick = async () => {
     var liftName = editNameTextfield.value;
     await insertExercise(liftName, "edit");
-    await updateTable(returnDay_id_());
+    await updateTable(getDay_id_());
 }
 //funkcija za spreminajnje strani in updejtiranje tabele
 async function updateTable(day_id) {
@@ -103,7 +111,7 @@ addExerciseButton.onclick = async () => {
     } else {
         await insertExercise(addExerciseField.value, "insert");
         cleanTable(insertExerciseTable);
-        await showExercise(returnDay_id_());
+        await showExercise(getDay_id_());
         addExerciseField.value = "";
         addExerciseDiv.style.display = "none";
         buttons.style.display = "block";
