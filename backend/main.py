@@ -45,15 +45,15 @@ class nameLiftEdit(BaseModel):
 @app.delete("/lift/delete/{lift_id}")
 async def brisi_uporabnika(lift_id: int):
     mycursor = mydb.cursor()
-    sql = "delete from liftBaza where id = %s"
+    sql = "delete from liftset where id = %s"
     mycursor.execute(sql, (lift_id,))
     mydb.commit()
     return "Uspešno deletano"
 
-@app.get("/lift/izpisChart/{lift_name}")
+@app.get("/lift/izpisChart/{lift_name}") 
 async def izpis_dt_lift(lift_name: str):
     mycursor = mydb.cursor()
-    sql = "select teza,rep,rpe,datum from liftBaza where lift = %s"
+    sql = "select teza,rep,rpe,datum from liftset where lift = %s"
     mycursor.execute(sql, (lift_name,))
     rows = mycursor.fetchall()
     array = []
@@ -64,7 +64,7 @@ async def izpis_dt_lift(lift_name: str):
 @app.get("/lift/izpis/{lift_name}")
 async def root(lift_name: str):
     mycursor = mydb.cursor()
-    sql = "select * from liftBaza where lift = %s"
+    sql = "select * from liftset where lift = %s"
     mycursor.execute(sql, (lift_name,))
     rows = mycursor.fetchall()
     array = []
@@ -75,7 +75,7 @@ async def root(lift_name: str):
 @app.post("/lift/vpis")
 async def read_root(data: Data):
     mycursor = mydb.cursor()
-    sql = "INSERT INTO liftbaza (lift,teza, rep, rpe, datum) VALUES(%s, %s, %s, %s, %s)"
+    sql = "INSERT INTO liftset (lift,teza, rep, rpe, datum) VALUES(%s, %s, %s, %s, %s)"
     val = (data.liftQ,data.tezaQ, data.repQ, data.rpeQ, data.sqlDateQ,)
     mycursor.execute(sql, val)
     mydb.commit()
