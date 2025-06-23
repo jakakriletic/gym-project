@@ -1,19 +1,53 @@
-CREATE TABLE liftbaza (
+
+CREATE TABLE Program (
+    id_program INT AUTO_INCREMENT PRIMARY KEY,
+    program_name VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE Cycle (
+    id_cycle INT AUTO_INCREMENT PRIMARY KEY,
+    cycle_name VARCHAR(255) NOT NULL UNIQUE,
+    start_date DATE,
+    id_program INT NOT NULL,
+    FOREIGN KEY (id_program) REFERENCES Program(id_program) ON DELETE CASCADE
+);
+
+CREATE TABLE Week (
+    id_week INT AUTO_INCREMENT PRIMARY KEY,
+    week_number INT,
+    id_cycle INT NOT NULL,
+    FOREIGN KEY (id_cycle) REFERENCES Cycle(id_cycle) ON DELETE CASCADE
+);
+
+CREATE TABLE Day (
+    id_day INT AUTO_INCREMENT PRIMARY KEY,
+    day_name VARCHAR(255) NOT NULL UNIQUE,
+    id_week INT NOT NULL,
+    FOREIGN KEY (id_week) REFERENCES Week(id_week) ON DELETE CASCADE
+);
+
+CREATE TABLE exercise (
+    id_exercise INT AUTO_INCREMENT PRIMARY KEY,
+    lift_name VARCHAR(255) NOT NULL,
+    id_day INT NOT NULL,
+    FOREIGN KEY (id_day) REFERENCES Day(id_day) ON DELETE CASCADE
+);
+
+CREATE TABLE lift_set (
     id INT AUTO_INCREMENT PRIMARY KEY,
     lift VARCHAR(255),
     teza VARCHAR(255),
     rep VARCHAR(255),
     rpe VARCHAR(255),
-    datum DATE
+    datum DATE,
+    id_exercise INT NOT NULL,
+    FOREIGN KEY (id_exercise) REFERENCES exercise(id_exercise) ON DELETE CASCADE
 );
 
-CREATE TABLE gymDay (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    dayName VARCHAR(255) NOT NULL UNIQUE
+CREATE TABLE one_rep_max (
+    id_pr INT AUTO_INCREMENT PRIMARY KEY,
+    pr_number INT,
+    id_exercise INT NOT NULL,
+    FOREIGN KEY (id_exercise) REFERENCES exercise(id_exercise) ON DELETE CASCADE
 );
-CREATE TABLE gymDayLifts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    liftName VARCHAR(255) NOT NULL,
-    id_day INT NOT NULL,
-    FOREIGN KEY (id_day) REFERENCES gymDay(id) ON DELETE CASCADE
-);
+

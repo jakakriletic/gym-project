@@ -84,7 +84,7 @@ async def read_root(data: Data):
 @app.get("/lift/gymDay")
 async def gymDay():
     mycursor = mydb.cursor()
-    sql = "SELECT * from gymDay"
+    sql = "SELECT * from day"
     mycursor.execute(sql)
     rez = mycursor.fetchall()
     return rez
@@ -92,7 +92,7 @@ async def gymDay():
 @app.post("/lift/addDay")
 async def addDay(data: nameDayInput):
     mycursor = mydb.cursor()
-    sql = "INSERT INTO gymDay (dayName) VALUES(%s)"
+    sql = "INSERT INTO day (dayName) VALUES(%s)"
     val = (data.day_name,)
     mycursor.execute(sql, val)
     mydb.commit()
@@ -101,7 +101,7 @@ async def addDay(data: nameDayInput):
 @app.delete("/lift/deleteDay/{idDay}")
 async def deleteLift(idDay: int):
     mycursor = mydb.cursor()
-    sql = "DELETE FROM gymDay where id = %s"
+    sql = "DELETE FROM day where id = %s"
     val = (idDay,)
     mycursor.execute(sql, val)
     mydb.commit()
@@ -110,7 +110,7 @@ async def deleteLift(idDay: int):
 @app.get("/lift/getExercise/{day_id}")
 async def getExercise(day_id: int):
     mycursor = mydb.cursor()
-    sql = "SELECT * FROM gymDayLifts where id_day = %s"
+    sql = "SELECT * FROM exercise where id_day = %s"
     val = (day_id,)
     mycursor.execute(sql, val)
     rez = mycursor.fetchall()
@@ -119,7 +119,7 @@ async def getExercise(day_id: int):
 @app.post("/lift/addLift")
 async def addLift(data: nameLiftInput):
     mycursor = mydb.cursor()
-    sql = "INSERT INTO gymDayLifts (liftName, id_day) VALUES(%s, %s)"
+    sql = "INSERT INTO exercise (liftName, id_day) VALUES(%s, %s)"
     val = (data.liftName, data.day_id,)
     mycursor.execute(sql, val)
     mydb.commit()
@@ -128,7 +128,7 @@ async def addLift(data: nameLiftInput):
 @app.post("/lift/editLift")
 async def addLift(data: nameLiftEdit):
     mycursor = mydb.cursor()
-    sql = "update gymDayLifts SET liftName=%s, id_day = %s where id = %s"
+    sql = "update exercise SET liftName=%s, id_day = %s where id = %s"
     val = (data.liftName, data.day_id,data.id)
     mycursor.execute(sql, val)
     mydb.commit()
@@ -137,7 +137,7 @@ async def addLift(data: nameLiftEdit):
 @app.delete("/lift/deleteLift/{liftName}")
 async def deleteLift(liftName: str):
     mycursor = mydb.cursor()
-    sql = "DELETE FROM gymDayLifts where liftName = %s"
+    sql = "DELETE FROM exercise where liftName = %s"
     val = (liftName,)
     mycursor.execute(sql, val)
     mydb.commit()
