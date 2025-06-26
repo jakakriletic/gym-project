@@ -17,13 +17,31 @@
         </nav>
     </div>
     <div class="box1P">
-        <button id="insertSplitDay">EDIT DAY</button>
-        <div class="chooseDaySplit" style="display: none;"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
-            <table id="chooseDaysTable">  
-                
+        <!--<button id="insertSplitDay">EDIT DAY</button> -->
+        <div class = "programDiv">
+            <table id="addProgramTable">
             </table>
         </div>
-        <div class= "SplitDay" style="display: none;"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
+        
+        <div class="chooseDaySplit" style="display: none;"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
+            <div class="rightSide">
+                <label for="cycleName">Cycle Name:</label>
+                <input type="text" id="cycleName" name="cycleName">
+                <br>
+                <label for="weekCount">Weeks:</label>
+                <input type="range" min="1" max="12" value="1" id="weekCount">
+                <span id="weekOutput"></span>
+                <br>
+                <label for="linearProgressiveOverload">Linear progressive overload</label>
+                <input type="checkbox" name="linearProgressiveOverload" id="linearProgressiveOverload" checked>
+            </div>
+            <div class="leftSide">
+                <table id="dayTable">  
+                </table>
+            </div>
+
+        </div>
+        <div class= "dayDiv" style="display: none;"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
             <div class="SplitContainer" > 
                 <label for="split">Day name:</label>
                 <textarea placeholder="Vnesi ime novega dneva" name="split" id="split" cols = 20></textarea>
@@ -37,7 +55,7 @@
     </div>
     <div class="box2P">
         <div class="editDay" style="display: none;"> <!--TUKEJ BOS DAL STYLE DISPLAY: NONE-->
-            <div id="leftSide">
+            <div class="leftSide">
                 <div id="buttons"> 
                     <button class="btn" id="goToAddExercise">Add new lifts</button>
                     <p></p>
@@ -52,7 +70,7 @@
                 </div>
                 
             </div>
-            <div id="rightSide">
+            <div class="rightSide">
                 <p>List of exercises</p>
                 <table id="insertExercise">
 

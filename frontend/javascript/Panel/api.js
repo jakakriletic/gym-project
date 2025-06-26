@@ -1,4 +1,4 @@
-import {createChooseDayButton, createLastButton, showLiftButton} from './gui.js';
+import {createChooseDayButton, createLastButton, showLiftButton, createProgramButton} from './gui.js';
 import {getDayID, getLiftID, setDayID} from './state.js';
 import {} from './variable.js';
 
@@ -14,7 +14,22 @@ export async function getChooseDayButton() {
     }
     createLastButton();
 }
+export async function getProgram() {
+    const response = await fetch("http://127.0.0.1:8000/lift/getProgram");
+    const podatki = await response.json();
 
+    for (let i = 0; i < podatki.length; i++){
+        createProgramButton(podatki[i][0],podatki[i][1]);
+    } 
+}
+export async function get() {
+    const response = await fetch("http://127.0.0.1:8000/lift/program");
+    const podatki = await response.json();
+
+    for (let i = 0; i < podatki.length; i++){
+        
+    } 
+}
 //pokaže vaje v specifičnem dnevu
 export async function showExercise(day_id) {
     const response = await fetch("http://127.0.0.1:8000/lift/getExercise/"+ day_id);

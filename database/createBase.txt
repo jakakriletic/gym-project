@@ -8,11 +8,13 @@ CREATE TABLE Cycle (
     id_cycle INT AUTO_INCREMENT PRIMARY KEY,
     cycle_name VARCHAR(255) NOT NULL UNIQUE,
     start_date DATE,
+    cycle_duration INT,
+    goals VARCHAR(255),
     id_program INT NOT NULL,
     FOREIGN KEY (id_program) REFERENCES Program(id_program) ON DELETE CASCADE
 );
 
-CREATE TABLE Week (
+CREATE TABLE week (
     id_week INT AUTO_INCREMENT PRIMARY KEY,
     week_number INT,
     id_cycle INT NOT NULL,
@@ -22,8 +24,8 @@ CREATE TABLE Week (
 CREATE TABLE Day (
     id_day INT AUTO_INCREMENT PRIMARY KEY,
     day_name VARCHAR(255) NOT NULL UNIQUE,
-    id_week INT NOT NULL,
-    FOREIGN KEY (id_week) REFERENCES Week(id_week) ON DELETE CASCADE
+    id_program INT,
+    FOREIGN KEY (id_program) REFERENCES program(id_program) ON DELETE CASCADE
 );
 
 CREATE TABLE exercise (
@@ -33,7 +35,7 @@ CREATE TABLE exercise (
     FOREIGN KEY (id_day) REFERENCES Day(id_day) ON DELETE CASCADE
 );
 
-CREATE TABLE lift_set (
+CREATE TABLE liftSet (
     id INT AUTO_INCREMENT PRIMARY KEY,
     lift VARCHAR(255),
     teza VARCHAR(255),

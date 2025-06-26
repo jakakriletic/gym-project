@@ -1,11 +1,11 @@
-import {getChooseDayButton, deleteDay, showExercise, addDay, insertExercise, deleteLift} from './api.js';
+import {getChooseDayButton, deleteDay, showExercise, addDay, insertExercise, deleteLift, getProgram} from './api.js';
 import {cleanTable} from './gui.js';
 import {getDayID, getLiftName} from './state.js';
-import {insertExerciseTable, dayTable, chooseDaysTable} from './variable.js';
+import {insertExerciseTable, dayTable} from './variable.js';
 
 const divChooseDay = document.querySelector(".chooseDaySplit");
 const divEditDay = document.querySelector(".editDay");
-const divSplit = document.querySelector(".SplitDay");
+const dayDiv = document.querySelector(".dayDiv");
 const box3PDiv = document.querySelector(".box3P");
 const editNameTextfield =  document.querySelector("#nameLiftHolder");
 const addExerciseField = document.querySelector("#addExerciseField");
@@ -17,6 +17,20 @@ const addExerciseDiv = document.querySelector("#addExerciseDiv");
 const buttons = document.querySelector("#buttons");
 const cancleExerciseButton = document.querySelector("#cancleExercise");
 const cancleLiftsButton = document.querySelector("#cancleLifts");
+const programDiv = document.querySelector(".programDiv");
+//slider:
+
+const slider = document.querySelector("#weekCount");
+const weekOutput = document.querySelector("#weekOutput");
+weekOutput.innerHTML = slider.value;
+
+window.onload = () => {
+    getProgram();
+    slider.oninput = function() {
+    weekOutput.innerHTML = this.value;
+    
+}
+}
 
 document.querySelector("#deleteDay").onclick = async () => {
     await deleteDay(getDayID());
@@ -33,10 +47,7 @@ export function daysToEdit(day_id) {
     showExercise(day_id);
 }
 
-export function chooseDayToAddSPlit() {
-    divSplit.style.display = "block";
-    divChooseDay.style.display = "none";
-}
+
 export function editLiftPage(name) {
     box3PDiv.style.display = "block";
     divEditDay.style.display = "none";
@@ -46,6 +57,7 @@ export function editLiftPage(name) {
 document.querySelector("#splitAdd").onclick = () => {
     var newSplitDayInput = document.querySelector("#split");
     if (newSplitDayInput) {
+        //dodaj ekstra variable za day----------------------------------------!!
         addDay(newSplitDayInput.value);
         location.reload();
     }
@@ -94,9 +106,9 @@ async function updateTable(day_id) {
 //brisanje dnevov iz baze -- klici in DOM
 document.querySelector("#deleteDay").onclick = async () => {
     await deleteDay(getDayID());
-    cleanTable(chooseDaysTable);
+    cleanTable(dayTable);
     await getChooseDayButton();
-    divChooseDaySplit.style.display = "block";
+    divChooseDaySplit.style.display = "flex";
     diveditDay.style.display = "none";
 }
 //za canclanje izbire tvojeta brosplita
@@ -105,14 +117,10 @@ document.querySelector("#splitCancle").onclick = () => {
 }
 //funkcija ki gre nazaj 
 function cancle() {
-    divSplit.style.display = "none";
-    divChooseDaySplit.style.display = "block";
+    dayDiv.style.display = "none";
+    divChooseDaySplit.style.display = "flex";
 }
-buttonSplit.onclick = () => {
-    divChooseDaySplit.style.display = "block";
-    buttonSplit.style.display = "none";
-    getChooseDayButton();
-}
+
 goToAddExerciseButton.onclick = () => {
     addExerciseDiv.style.display = "block";
     buttons.style.display = "none";
@@ -124,6 +132,31 @@ cancleExerciseButton.onclick = () => {
     addExerciseField.placeholder = "Add lift";
 }
 cancleLiftsButton.onclick = () => {
-    divChooseDaySplit.style.display = "block";
+    divChooseDaySplit.style.display = "flex";
     diveditDay.style.display = "none";
 }
+
+//KONTROLIRANJE SPLITOV-----------------------
+
+//dodajanje imena dneva v splitu
+
+buttonSplit.onclick = () => {
+    divChooseDaySplit.style.display = "flex";
+    buttonSplit.style.display = "none";
+    getChooseDayButton();
+}
+//premik iz izbire dneva v dodajanje dneva
+export function chooseDayToAddSPlit() {
+    dayDiv.style.display = "block";
+    divChooseDay.style.display = "none";
+}
+//dodajanje lista programov iz baze
+export function program() {
+    divChooseDaySplit.style.display = "flex";
+    programDiv.style.display = "none";
+    getChooseDayButton();
+}
+
+
+
+

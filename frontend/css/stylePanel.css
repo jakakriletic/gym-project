@@ -31,20 +31,20 @@
     height: auto;
     /*border: black solid 1px;*/
 }
-#leftSide {
+.leftSide {
     display: block;
     box-sizing: border-box;
     width: 50%;
     height: auto;
     border: black solid 1px;
 }
-#rightSide {
+.rightSide {
     width: 50%;
     box-sizing: border-box;
     height: auto;
     border: black solid 1px;
 }
-#rightSide button {
+.rightSide button {
     display: block;
 }
 #cancleLifts{
@@ -53,4 +53,8 @@
 
 #addButton{
     margin-top: 100px;
+}
+.chooseDaySplit {
+    display: flex;
+    width: 100%;
 }

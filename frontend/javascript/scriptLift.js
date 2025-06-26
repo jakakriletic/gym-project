@@ -168,12 +168,13 @@ async function vpis() {
     const rep1 = rep.value;
     const rpe1 = rpe.value;
     const sqlDate1 = sqlDate;
+    const id_exercise1 = 1;
 
     try{
         const response = await fetch("http://127.0.0.1:8000/lift/vpis", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({liftQ: lift1, tezaQ: teza1, repQ: rep1, rpeQ: rpe1, sqlDateQ: sqlDate1})
+        body: JSON.stringify({lift: lift1, teza: teza1, rep: rep1, rpe: rpe1, sqlDate: sqlDate1, id_exercise: id_exercise1})
     });
     const data = await response.json();
     output.innerHTML = data.Rezultat;
