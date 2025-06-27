@@ -29,7 +29,7 @@ window.onload = () => {
     slider.oninput = function() {
     weekOutput.innerHTML = this.value;
     
-}
+    }
 }
 
 document.querySelector("#deleteDay").onclick = async () => {
